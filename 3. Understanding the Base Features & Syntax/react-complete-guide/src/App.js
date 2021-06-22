@@ -1,50 +1,70 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
 
-const app = props => {
-  const [personsState, setPersonsState] = useState({
+class App extends Component {
+  state = {
     persons: [
-      { name: 'Nataly', age: 22 },
-      { name: 'Andrew', age: 23 },
-      { name: 'Anatolii', age: 21 }
-    ] 
-  });
+      { name: 'Nataly', age: 28 },
+      { name: 'Andrew', age: 29 },
+      { name: 'Anatolii', age: 26 }
+    ],
+    otherState: 'some other value'
+  }
 
-  const [otherState, setOtherState] = useState('some other value');
-
-  console.log(personsState, otherState);
-
-  const switchNameHandler = () => {
-    //console.log('Was clicked!');
-    // DON'T DO THIS: personsState.persons[0].name = 'Natalia';
-
-    //This is a method which allows us to update this special 
-    //state property here and it will then ensure that 
-    //React gets to know about this update and updates the DOM.
-    setPersonsState({
+  switchNameHandler = (newName) => {
+    // console.log('Was clicked!');
+    // DON'T DO THIS: this.state.persons[0].name = 'Maximilian';
+    this.setState({
       persons: [
-        { name: 'Natalia', age: 22 },
-        { name: 'Andrew', age: 23 },
-        { name: 'Anatolii', age: 24 }
-      ],
-    });
-  };
+        { name: newName, age: 28 },
+        { name: 'Andrew', age: 29 },
+        { name: 'Anatolii', age: 27 }
+      ]
+    })
+  }
 
-  return (
-    <div className="App">
-      <h1>Hi, I'm React App</h1>
-      <p>This is really working!</p>
-      <button onClick={switchNameHandler}>Switch Name</button>
-      <Person name={personsState.persons[0].name} age={personsState.persons[0].age} />
-      <Person name={personsState.persons[1].name} age={personsState.persons[1].age}>My Hobbies: Racing</Person>
-      <Person name={personsState.persons[2].name} age={personsState.persons[2].age} />
-      <p>There was a tiger cub!</p>
-    </div>
-  );
+  nameChangedHandler = (event) => {
+    this.setState({
+      persons: [
+        { name: 'Natalia', age: 28 },
+        { name: event.target.value, age: 29 },
+        { name: 'Anatolii', age: 26 }
+      ]
+    })
+  }
 
+  render() {
+    //inline style
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    };
+    return (
+      <div className="App">
+        <h1>Hi, I'm a React App</h1>
+        <p>This is really working!</p>
+        <button
+          style={style}
+          onClick={() => this.switchNameHandler('Natalia!!')}>Switch Name</button>
+        <Person
+          name={this.state.persons[0].name}
+          age={this.state.persons[0].age} />
+        <Person
+          name={this.state.persons[1].name}
+          age={this.state.persons[1].age}
+          click={this.switchNameHandler.bind(this, 'Nataly!')}
+          changed={this.nameChangedHandler} >My Hobbies: Racing</Person>
+        <Person
+          name={this.state.persons[2].name}
+          age={this.state.persons[2].age} />
+      </div>
+    );
+    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
+  }
 }
 
-export default app;
-
-
+export default App;
