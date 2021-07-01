@@ -5,9 +5,7 @@ import Cockpit from '../components/Cockpit/Cockpit';
 
 import classes from './App.module.css';
 
-
 class App extends Component {
-
   constructor(props) {
     super(props);
     console.log('[App.js] constructor');
@@ -28,9 +26,9 @@ class App extends Component {
     return state;
   }
 
-  // componentWillMount() {
-  //   console.log('[App.js] componentWillMount')
-  // }
+  componentWillMount() {
+    console.log('[App.js] componentWillMount');
+  }
 
   componentDidMount() {
     console.log('[App.js] componentDidMount')
@@ -48,6 +46,7 @@ class App extends Component {
     // const person = Object.assign({}, this.state.persons[personIndex]);
 
     person.name = event.target.value;
+
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
@@ -71,10 +70,13 @@ class App extends Component {
     let persons = null;
 
     if (this.state.showPersons) {
-      persons = <Persons
-        persons={this.state.persons}
-        clickted={this.deletePersonHandler}
-        changed={this.nameChangedHandler} />;
+      persons = (
+        <Persons
+          persons={this.state.persons}
+          clicked={this.deletePersonHandler}
+          changed={this.nameChangedHandler}
+        />
+      );
     }
 
     return (
