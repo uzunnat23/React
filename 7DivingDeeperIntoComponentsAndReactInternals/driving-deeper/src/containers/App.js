@@ -19,6 +19,7 @@ class App extends Component {
     ],
     otherState: "some other value",
     showPersons: false,
+    showCockpit: true,
   };
 
   //returns an object to update the state, or null to not update anything.
@@ -91,12 +92,21 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
-        <Cockpit
-          title={this.props.appTitle}
-          showPersons={this.state.showPersons}
-          persons={this.state.persons}
-          clicked={this.togglePersonHandler}
-        />
+        <button
+          onClick={() => {
+            this.setState({ showCockpit: false });
+          }}
+        >
+          Remove Cockpit
+        </button>
+        {this.state.showCockpit ? (
+          <Cockpit
+            title={this.props.appTitle}
+            showPersons={this.state.showPersons}
+            personsLength={this.state.persons.length}
+            clicked={this.togglePersonHandler}
+          />
+        ) : null}
         {persons}
       </div>
     );

@@ -1,24 +1,46 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import classes from "./Cockpit.module.css";
 
 const cockpit = (props) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    console.log("[Cockpit.js] useEffect");
+    // HTTP request...
+    //const timer =
+    setTimeout(() => {
+      alert("Saved data to cloud!");
+    }, 1000);
+    return () => {
+      // clearTimeout(timer);
+      console.log("[Cockpit.js] cleanup work in useEffect");
+    };
+  }, []);
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    console.log("[Cockpit.js] 2nd useEffect");
+    return () => {
+      console.log("[Cockpit.js] cleanup work in 2nd useEffect");
+    };
+  });
+
   const assignedClasses = [];
-  // let bthClass = '';
+  let btnClass = "";
 
   console.log({ props });
 
-  // if (props.showsPersons) {
-  //     bthClass = classes.Red;
-  // }
+  if (props.showPersons) {
+    btnClass = classes.Red;
+  }
 
-  const btnClass = props.showPersons ? classes.Red : "";
+  //const btnClass = props.showPersons ? classes.Red : "";
 
-  if (props.persons.length <= 2) {
+  if (props.personsLength <= 2) {
     assignedClasses.push(classes.red); //classes=['red']
   }
 
-  if (props.persons.length <= 1) {
+  if (props.personsLength <= 1) {
     assignedClasses.push(classes.bold); //classes=['red', 'bold']
   }
 
@@ -33,4 +55,8 @@ const cockpit = (props) => {
   );
 };
 
-export default cockpit;
+// React.memo()
+//When deciding to update DOM, React first renders your component,
+// then compares the result with the previous render.
+// If the render results are different, React updates the DOM.
+export default React.memo(cockpit);
