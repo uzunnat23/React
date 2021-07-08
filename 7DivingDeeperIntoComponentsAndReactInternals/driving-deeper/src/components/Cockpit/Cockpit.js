@@ -1,23 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 
 import classes from "./Cockpit.module.css";
 
-const cockpit = (props) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+const Cockpit = (props) => {
+  const toggleBtnRef = useRef(null);
+
   useEffect(() => {
     console.log("[Cockpit.js] useEffect");
     // HTTP request...
     //const timer =
-    setTimeout(() => {
-      alert("Saved data to cloud!");
-    }, 1000);
+
+    // setTimeout(() => {
+    //   alert("Saved data to cloud!");
+    // }, 1000);
+    toggleBtnRef.current.click();
     return () => {
       // clearTimeout(timer);
       console.log("[Cockpit.js] cleanup work in useEffect");
     };
   }, []);
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     console.log("[Cockpit.js] 2nd useEffect");
     return () => {
@@ -48,7 +50,7 @@ const cockpit = (props) => {
     <div className={classes.Cockpit}>
       <h1>{props.title}</h1>
       <p className={assignedClasses.join(" ")}>This is really working!</p>
-      <button className={btnClass} onClick={props.clicked}>
+      <button ref={toggleBtnRef} className={btnClass} onClick={props.clicked}>
         Toogle Persons
       </button>
     </div>
@@ -59,4 +61,4 @@ const cockpit = (props) => {
 //When deciding to update DOM, React first renders your component,
 // then compares the result with the previous render.
 // If the render results are different, React updates the DOM.
-export default React.memo(cockpit);
+export default React.memo(Cockpit);
