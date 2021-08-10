@@ -14,9 +14,9 @@ const orderSummary = (props) => {
   return (
     <Aux>
       <h3>Your Order</h3>
-      <p>A delicious buurger witn tje following ingredients:</p>
+      <p>A delicious buurger witn the following ingredients:</p>
       <ul>{ingredientSummary}</ul>
-      <p>Continue to Chrckout?</p>
+      <p>Continue to Checkout?</p>
     </Aux>
   );
 };
