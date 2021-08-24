@@ -6,6 +6,7 @@ import NavigationItems from "../NavigationItems/NavigationItems";
 import classes from "./SideDrawer.module.css";
 
 const sideDrawer = () => {
+  // ...
   return (
     <div className={classes.SideDrawer}>
       <div className={classes.Logo}>

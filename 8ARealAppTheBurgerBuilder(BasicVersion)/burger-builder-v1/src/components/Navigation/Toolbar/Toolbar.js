@@ -11,10 +11,10 @@ const toolbar = (props) => (
     <div className={classes.Logo}>
       <Logo />
     </div>
-
-    <nav>
+    <nav className={classes.DesktopOnly}>
       <NavigationItems />
     </nav>
   </header>
 );
+
 export default toolbar;
