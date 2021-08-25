@@ -21,7 +21,6 @@ class NewPost extends Component {
       .post("https://jsonplaceholder.typicode.com/posts", data)
       .then((response) => {
         console.log(response);
-        //this.setState({ loadedPost: response.data });
       });
   };
 
